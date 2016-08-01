@@ -2,7 +2,7 @@
 # copyright 2013, Stefan Beller
 # This file is also public domain.
 
-OBJS = MaxRectsBinPackTest/BinPack.o  MaxRectsBinPack.o  Rect.o
+OBJS = MaxRectsBinPackTest/BinPack.o  MaxRectsBinPack.o  Rect.o ShelfBinPack.o GuillotineBinPack.o SkylineBinPack.o
 CXX = g++
 # If you want to compile it faster try these options (gcc only)
 # CPPFLAGS = -march=native -mtune=native -Ofast -g -flto -Wall -Wextra
