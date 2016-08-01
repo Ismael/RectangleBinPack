@@ -316,7 +316,7 @@ Rect SkylineBinPack::FindPositionForNewNodeBottomLeft(int width, int height, int
 				debug_assert(disjointRects.Disjoint(newNode));
 			}
 		}
-		if (RectangleFits(i, height, width, y))
+		/*if (RectangleFits(i, height, width, y))
 		{
 			if (y + width < bestHeight || (y + width == bestHeight && skyLine[i].width < bestWidth))
 			{
@@ -329,7 +329,7 @@ Rect SkylineBinPack::FindPositionForNewNodeBottomLeft(int width, int height, int
 				newNode.height = width;
 				debug_assert(disjointRects.Disjoint(newNode));
 			}
-		}
+		}*/
 	}
 
 	return newNode;
@@ -386,7 +386,7 @@ Rect SkylineBinPack::FindPositionForNewNodeMinWaste(int width, int height, int &
 				debug_assert(disjointRects.Disjoint(newNode));
 			}
 		}
-		if (RectangleFits(i, height, width, y, wastedArea))
+		/*if (RectangleFits(i, height, width, y, wastedArea))
 		{
 			if (wastedArea < bestWastedArea || (wastedArea == bestWastedArea && y + width < bestHeight))
 			{
@@ -399,7 +399,7 @@ Rect SkylineBinPack::FindPositionForNewNodeMinWaste(int width, int height, int &
 				newNode.height = width;
 				debug_assert(disjointRects.Disjoint(newNode));
 			}
-		}
+		}*/
 	}
 
 	return newNode;

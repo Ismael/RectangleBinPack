@@ -45,7 +45,7 @@ public:
 	void Insert(std::vector<RectSize> &rects, std::vector<Rect> &dst, FreeRectChoiceHeuristic method);
 
 	/// Inserts a single rectangle into the bin, possibly rotated.
-	Rect Insert(int width, int height, FreeRectChoiceHeuristic method);
+	Rect Insert(int width, int height, int method);
 
 	/// Computes the ratio of used surface area to the total bin area.
 	float Occupancy() const;
@@ -64,7 +64,7 @@ private:
 	Rect ScoreRect(int width, int height, FreeRectChoiceHeuristic method, int &score1, int &score2) const;
 
 	/// Places the given rectangle into the bin.
-	void PlaceRect(const Rect &node);
+	void PlaceRect(const Rect &node, std::vector<Rect> &dst);
 
 	/// Computes the placement score for the -CP variant.
 	int ContactPointScoreNode(int x, int y, int width, int height) const;

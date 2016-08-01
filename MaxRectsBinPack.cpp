@@ -47,7 +47,7 @@ void MaxRectsBinPack::Init(int width, int height)
 	freeRectangles.push_back(n);
 }
 
-Rect MaxRectsBinPack::Insert(int width, int height, FreeRectChoiceHeuristic method)
+Rect MaxRectsBinPack::Insert(int width, int height, int method)
 {
 	Rect newNode;
 	// Unused in this function. We don't need to know the score after finding the position.
@@ -111,12 +111,12 @@ void MaxRectsBinPack::Insert(std::vector<RectSize> &rects, std::vector<Rect> &ds
 		if (bestRectIndex == -1)
 			return;
 
-		PlaceRect(bestNode);
+		PlaceRect(bestNode, dst);
 		rects.erase(rects.begin() + bestRectIndex);
 	}
 }
 
-void MaxRectsBinPack::PlaceRect(const Rect &node)
+void MaxRectsBinPack::PlaceRect(const Rect &node, std::vector<Rect> &dst)
 {
 	size_t numRectanglesToProcess = freeRectangles.size();
 	for(size_t i = 0; i < numRectanglesToProcess; ++i)
@@ -132,7 +132,7 @@ void MaxRectsBinPack::PlaceRect(const Rect &node)
 	PruneFreeList();
 
 	usedRectangles.push_back(node);
-	//		dst.push_back(bestNode); ///\todo Refactor so that this compiles.
+  dst.push_back(node); ///\todo Refactor so that this compiles.
 }
 
 Rect MaxRectsBinPack::ScoreRect(int width, int height, FreeRectChoiceHeuristic method, int &score1, int &score2) const
@@ -195,6 +195,8 @@ Rect MaxRectsBinPack::FindPositionForNewNodeBottomLeft(int width, int height, in
 				bestX = freeRectangles[i].x;
 			}
 		}
+	/*
+    PROBAR ROTADO, deshabilitado!
 		if (freeRectangles[i].width >= height && freeRectangles[i].height >= width)
 		{
 			int topSideY = freeRectangles[i].y + width;
@@ -207,7 +209,7 @@ Rect MaxRectsBinPack::FindPositionForNewNodeBottomLeft(int width, int height, in
 				bestY = topSideY;
 				bestX = freeRectangles[i].x;
 			}
-		}
+		}*/
 	}
 	return bestNode;
 }

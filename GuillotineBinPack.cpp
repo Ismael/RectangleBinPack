@@ -82,7 +82,7 @@ void GuillotineBinPack::Insert(std::vector<RectSize> &rects, bool merge,
 					i = freeRectangles.size(); // Force a jump out of the outer loop as well - we got an instant fit.
 					break;
 				}
-				// If flipping this rectangle is a perfect match, pick that then.
+				/*// If flipping this rectangle is a perfect match, pick that then.
 				else if (rects[j].height == freeRectangles[i].width && rects[j].width == freeRectangles[i].height)
 				{
 					bestFreeRect = i;
@@ -91,7 +91,7 @@ void GuillotineBinPack::Insert(std::vector<RectSize> &rects, bool merge,
 					bestScore = std::numeric_limits<int>::min();
 					i = freeRectangles.size(); // Force a jump out of the outer loop as well - we got an instant fit.
 					break;
-				}
+				}*/
 				// Try if we can fit the rectangle upright.
 				else if (rects[j].width <= freeRectangles[i].width && rects[j].height <= freeRectangles[i].height)
 				{
@@ -104,6 +104,7 @@ void GuillotineBinPack::Insert(std::vector<RectSize> &rects, bool merge,
 						bestScore = score;
 					}
 				}
+				/*
 				// If not, then perhaps flipping sideways will make it fit?
 				else if (rects[j].height <= freeRectangles[i].width && rects[j].width <= freeRectangles[i].height)
 				{
@@ -115,7 +116,7 @@ void GuillotineBinPack::Insert(std::vector<RectSize> &rects, bool merge,
 						bestFlipped = true;
 						bestScore = score;
 					}
-				}
+				}*/
 			}
 		}
 
@@ -129,10 +130,10 @@ void GuillotineBinPack::Insert(std::vector<RectSize> &rects, bool merge,
 		newNode.y = freeRectangles[bestFreeRect].y;
 		newNode.width = rects[bestRect].width;
 		newNode.height = rects[bestRect].height;
-
+/*
 		if (bestFlipped)
 			std::swap(newNode.width, newNode.height);
-
+*/
 		// Remove the free space we lost in the bin.
 		SplitFreeRectByHeuristic(freeRectangles[bestFreeRect], newNode, splitMethod);
 		freeRectangles.erase(freeRectangles.begin() + bestFreeRect);
@@ -449,7 +450,7 @@ Rect GuillotineBinPack::FindPositionForNewNode(int width, int height, FreeRectCh
 			debug_assert(disjointRects.Disjoint(bestNode));
 			break;
 		}
-		// If this is a perfect fit sideways, choose it.
+		/*// If this is a perfect fit sideways, choose it.
 		else if (height == freeRectangles[i].width && width == freeRectangles[i].height)
 		{
 			bestNode.x = freeRectangles[i].x;
@@ -460,7 +461,7 @@ Rect GuillotineBinPack::FindPositionForNewNode(int width, int height, FreeRectCh
 			*nodeIndex = i;
 			debug_assert(disjointRects.Disjoint(bestNode));
 			break;
-		}
+		}*/
 		// Does the rectangle fit upright?
 		else if (width <= freeRectangles[i].width && height <= freeRectangles[i].height)
 		{
@@ -477,7 +478,7 @@ Rect GuillotineBinPack::FindPositionForNewNode(int width, int height, FreeRectCh
 				debug_assert(disjointRects.Disjoint(bestNode));
 			}
 		}
-		// Does the rectangle fit sideways?
+		/*// Does the rectangle fit sideways?
 		else if (height <= freeRectangles[i].width && width <= freeRectangles[i].height)
 		{
 			int score = ScoreByHeuristic(height, width, freeRectangles[i], rectChoice);
@@ -492,7 +493,7 @@ Rect GuillotineBinPack::FindPositionForNewNode(int width, int height, FreeRectCh
 				*nodeIndex = i;
 				debug_assert(disjointRects.Disjoint(bestNode));
 			}
-		}
+		}*/
 	}
 	return bestNode;
 }
